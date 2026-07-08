@@ -183,14 +183,15 @@
             font-size: 18px;
             font-weight: bold;
             color: #115e59;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .result-item span {
             color: var(--primary-color);
             font-size: 24px;
-            margin-right: 8px;
-            display: inline-block;
-            unicode-bidi: bidi-override;
+            font-weight: 800;
         }
 
         @media (max-width: 768px) {
@@ -240,8 +241,7 @@
 
 <div class="container">
     <header>
-        <!-- رابط مباشر ومضمون لشعار جامعة اليرموك بدون حظر -->
-        <img src="https://i.ibb.co/3W6fCgV/Yarmouk-University-Logo.png" alt="Yarmouk University" class="university-logo">
+        <img src="https://i.ibb.co/LvbG99G/image.png" alt="Yarmouk University" class="university-logo">
         <h1>حساب المعدل الجامعي</h1>
         <p>نظام آمن ومشفر لحساب المعدل الفصلي والتراكمي لطلبة جامعة اليرموك</p>
     </header>
@@ -259,8 +259,7 @@
     </div>
 
     <div class="subjects-list" id="subjectsContainer">
-        <!-- الخانات الافتراضية -->
-    </div>
+        </div>
 
     <div class="results-panel">
         <div class="result-item">المعدل العام: <span id="finalGPA">0.00</span></div>
