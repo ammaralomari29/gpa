@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة المعدل الجامعي الذكية</title>
+    <title>حاسبة المعدل الجامعي - جامعة اليرموك</title>
     <style>
         :root {
-            --primary-color: #4f46e5;
-            --primary-hover: #4338ca;
-            --bg-color: #f1f5f9;
+            --primary-color: #0f766e; /* لون مستوحى من الهوية الرسمية */
+            --primary-hover: #115e59;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #0f172a;
             --border-color: #cbd5e1;
             --danger-color: #ef4444;
-            --danger-hover: #dc2626;
         }
 
         * {
@@ -26,7 +25,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            padding: 20px 10px;
+            padding: 30px 15px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -35,22 +34,30 @@
 
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 950px;
             background: var(--card-bg);
-            padding: 30px 20px;
+            padding: 30px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+        }
+
+        /* تنسيق اللوغو في المنتصف */
+        .university-logo {
+            max-width: 130px;
+            height: auto;
+            margin-bottom: 15px;
         }
 
         header h1 {
             color: var(--primary-color);
-            font-size: 26px;
-            margin-bottom: 8px;
+            font-size: 24px;
+            margin-bottom: 6px;
+            font-weight: 800;
         }
 
         header p {
@@ -69,104 +76,96 @@
             color: white;
             border: none;
             padding: 12px 24px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+            transition: background 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(15, 118, 110, 0.2);
         }
 
         .btn-add:hover {
             background-color: var(--primary-hover);
-            transform: translateY(-1px);
+        }
+
+        /* نظام الجدول والشريحة لتكون العناوين فوق الخانات مباشرة */
+        .table-header {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr 1fr 1fr 50px;
+            gap: 15px;
+            padding: 10px 15px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #334155;
+            margin-bottom: 10px;
+            text-align: center;
         }
 
         .subjects-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 30px;
         }
 
-        /* التصميم الافتراضي للشاشات الكبيرة (PC, لابتوب, أيباد أفقي) */
         .subject-row {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            grid-template-columns: 2.5fr 1fr 1fr 1fr 50px;
             gap: 15px;
             align-items: center;
             background: #f8fafc;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 10px 15px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
-            transition: all 0.2s;
-        }
-
-        .subject-row:hover {
-            border-color: #94a3b8;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .input-group label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #475569;
         }
 
         input {
-            padding: 10px 12px;
+            padding: 10px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 14px;
             outline: none;
             width: 100%;
-            background: #ffffff;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            text-align: center;
+        }
+
+        /* محاذاة اسم المادة لليمين بدلاً من المنتصف لجمالية النصوص */
+        input[type="text"] {
+            text-align: right;
         }
 
         input:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
         }
 
         .grade-badge {
             text-align: center;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             padding: 10px 5px;
-            border-radius: 8px;
-            background: #e2e8f0;
-            min-width: 80px;
-            border: 1px solid transparent;
+            border-radius: 6px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
         }
 
         .btn-delete {
-            background: #fee2e2;
-            border: 1px solid #fca5a5;
+            background: none;
+            border: none;
             color: var(--danger-color);
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 20px;
             cursor: pointer;
-            padding: 10px 15px;
-            border-radius: 8px;
-            transition: all 0.2s;
-            align-self: flex-end;
-            margin-bottom: 2px;
+            transition: transform 0.2s;
+            text-align: center;
         }
 
         .btn-delete:hover {
-            background: var(--danger-color);
-            color: white;
-            border-color: var(--danger-hover);
+            transform: scale(1.15);
         }
 
-        /* الألوان الخاصة بالتقديرات */
+        /* ألوان التقديرات */
         .grade-fail { background-color: #fee2e2; color: #ef4444; border-color: #fca5a5; }
         .grade-pass { background-color: #fef3c7; color: #d97706; border-color: #fde68a; }
         .grade-good { background-color: #e0f2fe; color: #0284c7; border-color: #bae6fd; }
@@ -174,56 +173,68 @@
         .grade-excellent { background-color: #dcfce7; color: #16a34a; border-color: #bbf7d0; }
 
         .results-panel {
-            background: #eef2ff;
+            background: #f0fdfa;
             border: 2px dashed var(--primary-color);
             padding: 20px;
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
         }
 
         .result-item {
             font-size: 18px;
-            font-weight: 800;
-            color: #1e1b4b;
+            font-weight: bold;
+            color: #115e59;
         }
 
         .result-item span {
             color: var(--primary-color);
             font-size: 24px;
-            margin-right: 5px;
+            margin-right: 8px;
         }
 
-        /* 📱 شاشات الهواتف والأجهزة الصغيرة (Responsive Media Queries) */
+        /* التوافق الكامل مع الهواتف الذكية */
         @media (max-width: 768px) {
+            .table-header {
+                display: none; /* إخفاء الهيدر الأفقي في الموبايل */
+            }
+
             .subject-row {
-                grid-template-columns: 1fr 1fr; /* تقسيم الخانات بالتساوي خانتين في كل سطر داخل الكارت */
+                grid-template-columns: 1fr 1fr;
                 gap: 12px;
                 padding: 15px;
                 background: #f1f5f9;
+                border-radius: 12px;
             }
-            
-            /* جعل خانة اسم المادة تأخذ السطر كاملاً في الهاتف لراحة العين */
-            .input-group:nth-child(1) {
+
+            /* في الموبايل نعيد إظهار العناوين بشكل داخلي ذكي */
+            .subject-row div::before {
+                content: attr(data-label);
+                display: block;
+                font-size: 11px;
+                font-weight: 700;
+                color: #64748b;
+                margin-bottom: 5px;
+            }
+
+            .subject-row .input-group-name {
                 grid-column: span 2;
             }
 
             .btn-delete {
                 grid-column: span 2;
-                align-self: center;
-                width: 100%;
-                text-align: center;
-                padding: 12px;
-                margin-top: 5px;
+                background: #fee2e2;
+                padding: 8px;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: bold;
             }
             
             .results-panel {
                 flex-direction: column;
+                gap: 12px;
                 text-align: center;
-                gap: 10px;
             }
         }
     </style>
@@ -232,20 +243,29 @@
 
 <div class="container">
     <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Yarmouk_University_Logo.png" alt="Yarmouk University Logo" class="university-logo">
         <h1>حاسبة المعدل الجامعي الذكية</h1>
-        <p>مصممة باحترافية لتناسب جميع الشاشات والمقاييس - حساب فوري للمعدل والتقدير</p>
+        <p>نظام آمن ومشفر لحساب المعدل الفصلي والتراكمي لطلبة جامعة اليرموك</p>
     </header>
 
     <div class="action-area">
         <button class="btn-add" onclick="addSubjectRow()">+ إضافة مادة جديدة</button>
     </div>
 
+    <div class="table-header">
+        <div>اسم المادة</div>
+        <div>عدد الساعات</div>
+        <div>العلامة</div>
+        <div>تقدير المادة</div>
+        <div>حذف</div>
+    </div>
+
     <div class="subjects-list" id="subjectsContainer">
         </div>
 
     <div class="results-panel">
-        <div class="result-item">المعدل العام:<span id="finalGPA">0.00</span></div>
-        <div class="result-item">التقدير العام:<span id="finalRating">-</span></div>
+        <div class="result-item">المعدل العام من 100:<span id="finalGPA">0.00</span></div>
+        <div class="result-item">التقدير العام المكتسب:<span id="finalRating">-</span></div>
     </div>
 </div>
 
@@ -266,24 +286,21 @@
         const row = document.createElement('div');
         row.className = 'subject-row';
         
+        // الأوسام المضافة هنا (data-label) مخصصة لترتيب العناوين تلقائياً إذا فُتح من الهاتف
         row.innerHTML = `
-            <div class="input-group">
-                <label>اسم المادة</label>
-                <input type="text" placeholder="مثال: فيزياء">
+            <div class="input-group-name" data-label="اسم المادة">
+                <input type="text" placeholder="مثال: مهارات حاسوب">
             </div>
-            <div class="input-group">
-                <label>عدد الساعات</label>
+            <div data-label="عدد الساعات">
                 <input type="number" class="hours-input" min="1" placeholder="0" oninput="calculateTotalGPA()">
             </div>
-            <div class="input-group">
-                <label>العلامة</label>
+            <div data-label="العلامة">
                 <input type="number" class="score-input" min="0" max="100" placeholder="0" oninput="updateRowGrade(this); calculateTotalGPA()">
             </div>
-            <div class="input-group">
-                <label>التقدير</label>
+            <div data-label="تقدير المادة">
                 <div class="grade-badge">-</div>
             </div>
-            <button class="btn-delete" onclick="this.parentElement.remove(); calculateTotalGPA()">🗑️ حذف المادة</button>
+            <button class="btn-delete" title="حذف المادة" onclick="this.parentElement.remove(); calculateTotalGPA()">🗑️</button>
         `;
         
         container.appendChild(row);
@@ -330,7 +347,7 @@
         }
     }
 
-    // بناء الـ 4 مواد الافتراضية
+    // توليد الأربع خانات عند فتح الموقع تلقائياً
     window.onload = function() {
         for (let i = 0; i < 4; i++) {
             addSubjectRow();
