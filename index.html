@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة المعدل الجامعي - جامعة اليرموك</title>
+    <title>حساب المعدل الجامعي</title>
     <style>
         :root {
-            --primary-color: #0f766e; /* لون مستوحى من الهوية الرسمية */
+            --primary-color: #0f766e;
             --primary-hover: #115e59;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
@@ -46,16 +46,16 @@
             margin-bottom: 35px;
         }
 
-        /* تنسيق اللوغو في المنتصف */
         .university-logo {
-            max-width: 130px;
+            max-width: 140px;
             height: auto;
             margin-bottom: 15px;
+            display: inline-block;
         }
 
         header h1 {
             color: var(--primary-color);
-            font-size: 24px;
+            font-size: 26px;
             margin-bottom: 6px;
             font-weight: 800;
         }
@@ -88,7 +88,6 @@
             background-color: var(--primary-hover);
         }
 
-        /* نظام الجدول والشريحة لتكون العناوين فوق الخانات مباشرة */
         .table-header {
             display: grid;
             grid-template-columns: 2.5fr 1fr 1fr 1fr 50px;
@@ -131,7 +130,6 @@
             text-align: center;
         }
 
-        /* محاذاة اسم المادة لليمين بدلاً من المنتصف لجمالية النصوص */
         input[type="text"] {
             text-align: right;
         }
@@ -165,7 +163,6 @@
             transform: scale(1.15);
         }
 
-        /* ألوان التقديرات */
         .grade-fail { background-color: #fee2e2; color: #ef4444; border-color: #fca5a5; }
         .grade-pass { background-color: #fef3c7; color: #d97706; border-color: #fde68a; }
         .grade-good { background-color: #e0f2fe; color: #0284c7; border-color: #bae6fd; }
@@ -192,12 +189,13 @@
             color: var(--primary-color);
             font-size: 24px;
             margin-right: 8px;
+            display: inline-block;
+            unicode-bidi: bidi-override;
         }
 
-        /* التوافق الكامل مع الهواتف الذكية */
         @media (max-width: 768px) {
             .table-header {
-                display: none; /* إخفاء الهيدر الأفقي في الموبايل */
+                display: none;
             }
 
             .subject-row {
@@ -208,7 +206,6 @@
                 border-radius: 12px;
             }
 
-            /* في الموبايل نعيد إظهار العناوين بشكل داخلي ذكي */
             .subject-row div::before {
                 content: attr(data-label);
                 display: block;
@@ -243,8 +240,9 @@
 
 <div class="container">
     <header>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Yarmouk_University_Logo.png" alt="Yarmouk University Logo" class="university-logo">
-        <h1>حاسبة المعدل الجامعي الذكية</h1>
+        <!-- رابط مباشر ومضمون لشعار جامعة اليرموك بدون حظر -->
+        <img src="https://i.ibb.co/3W6fCgV/Yarmouk-University-Logo.png" alt="Yarmouk University" class="university-logo">
+        <h1>حساب المعدل الجامعي</h1>
         <p>نظام آمن ومشفر لحساب المعدل الفصلي والتراكمي لطلبة جامعة اليرموك</p>
     </header>
 
@@ -261,11 +259,12 @@
     </div>
 
     <div class="subjects-list" id="subjectsContainer">
-        </div>
+        <!-- الخانات الافتراضية -->
+    </div>
 
     <div class="results-panel">
-        <div class="result-item">المعدل العام من 100:<span id="finalGPA">0.00</span></div>
-        <div class="result-item">التقدير العام المكتسب:<span id="finalRating">-</span></div>
+        <div class="result-item">المعدل العام: <span id="finalGPA">0.00</span></div>
+        <div class="result-item">التقدير العام المكتسب: <span id="finalRating">-</span></div>
     </div>
 </div>
 
@@ -286,7 +285,6 @@
         const row = document.createElement('div');
         row.className = 'subject-row';
         
-        // الأوسام المضافة هنا (data-label) مخصصة لترتيب العناوين تلقائياً إذا فُتح من الهاتف
         row.innerHTML = `
             <div class="input-group-name" data-label="اسم المادة">
                 <input type="text" placeholder="مثال: مهارات حاسوب">
@@ -347,7 +345,6 @@
         }
     }
 
-    // توليد الأربع خانات عند فتح الموقع تلقائياً
     window.onload = function() {
         for (let i = 0; i < 4; i++) {
             addSubjectRow();
